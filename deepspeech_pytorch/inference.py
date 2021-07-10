@@ -72,7 +72,7 @@ def transcribe(cfg: TranscribeConfig):
         decoded_offsets=decoded_offsets,
         cfg=cfg
     )
-    print(json.dumps(results))
+    return results
 
 
 def run_transcribe(audio_path: str,

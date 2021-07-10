@@ -10,7 +10,9 @@ cs.store(name="config", node=TranscribeConfig)
 
 @hydra.main(config_name="config")
 def hydra_main(cfg: TranscribeConfig):
-    transcribe(cfg=cfg)
+    result = transcribe(cfg=cfg)
+    transcript = result["output"][0]["transcription"]
+    return transcript.lower()
 
 
 if __name__ == '__main__':
