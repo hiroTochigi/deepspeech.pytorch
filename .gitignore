@@ -105,3 +105,6 @@ models/
 data/*.csv
 data/*_dataset/
 .vscode/
+
+# pretarained data
+*.ckpt
