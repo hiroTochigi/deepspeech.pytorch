@@ -15,15 +15,14 @@ cs.store(name="config", node=TranscribeConfig)
 def hydra_main(cfg: TranscribeConfig):
     audio_path_list = get_audio_list()
     for audio_path in audio_path_list:
-        if audio_path.find('010-14-000.wav') > -1:
-            output_path = "/analyze/transcript/" + audio_path.split('/')[-1].split('.')[0] + '.txt'
-            print(output_path)
-            cfg.audio_path=audio_path
-            cfg.model.model_path="deepspeech.pytorch/librispeech_pretrained_v3.ckpt"
-            result = transcribe(cfg=cfg)
-            transcript = result["output"][0]["transcription"]
-            with open(output_path, "w") as f:
-                f.write(transcript.lower())
+        output_path = "/analyze/transcript/" + audio_path.split('/')[-1].split('.')[0] + '.txt'
+        print(output_path)
+        cfg.audio_path=audio_path
+        cfg.model.model_path="deepspeech.pytorch/librispeech_pretrained_v3.ckpt"
+        result = transcribe(cfg=cfg)
+        transcript = result["output"][0]["transcription"]
+        with open(output_path, "w") as f:
+            f.write(transcript.lower())
 
 def get_audio_list():
     for root, dirs, audio_path_list in os.walk("/analyze/audio/"):
